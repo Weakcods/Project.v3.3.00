@@ -5,7 +5,6 @@ import RequirementsSection from './user/RequirementSection';
 import PaymentSection from './user/PaymentSection';
 import ActivitySection from './user/ActivitySection';
 
-
 export default function UserDashboard() {
   const { user } = useAuthStore();
   const [activeSection, setActiveSection] = useState('overview');
@@ -23,13 +22,11 @@ export default function UserDashboard() {
               Manage your gate passes and requirements
             </p>
           </div>
-          <div className="flex items-center gap-4">
-          </div>
         </div>
 
         {/* Navigation Tabs */}
         <div className="flex flex-wrap gap-2">
-          {['overview', 'requirements', 'payments', 'settings'].map((section) => (
+          {['overview', 'requirements', 'payments'].map((section) => (
             <button
               key={section}
               onClick={() => setActiveSection(section)}

@@ -1,4 +1,4 @@
-import { CreditCard, Receipt, History, AlertCircle } from 'lucide-react';
+import { CreditCard, Receipt, AlertCircle,  Wallet } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const payments = [
@@ -31,29 +31,48 @@ export default function PaymentSection() {
         Payments & Billing
       </h2>
 
-      {/* Payment Methods */}
+      {/* Payment Methods Section */}
       <div className="mb-8">
         <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-4">
           Payment Methods
         </h3>
-        <div className="grid gap-4 sm:grid-cols-2">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {/* Credit Card Option */}
           <button className="flex items-center gap-3 p-4 border dark:border-gray-700 rounded-lg hover:border-[#24FE41] transition-colors">
             <CreditCard className="text-[#24FE41]" size={24} />
             <div className="text-left">
-              <p className="font-medium text-gray-900 dark:text-white">Add Payment Method</p>
-              <p className="text-sm text-gray-600 dark:text-gray-400">Credit/Debit card</p>
+              <p className="font-medium text-gray-900 dark:text-white">Add Credit/Debit Card</p>
+              <p className="text-sm text-gray-600 dark:text-gray-400">Visa, MasterCard, etc.</p>
+            </div>
+          </button>
+
+          {/* GCash Option */}
+          <button className="flex items-center gap-3 p-4 border dark:border-gray-700 rounded-lg hover:border-[#24FE41] transition-colors">
+            <Wallet className="text-[#24FE41]" size={24} />
+            <div className="text-left">
+              <p className="font-medium text-gray-900 dark:text-white">GCash</p>
+              <p className="text-sm text-gray-600 dark:text-gray-400">Mobile wallet</p>
+            </div>
+          </button>
+
+          {/* Maya Option */}
+          <button className="flex items-center gap-3 p-4 border dark:border-gray-700 rounded-lg hover:border-[#24FE41] transition-colors">
+            <Wallet className="text-[#24FE41]" size={24} />
+            <div className="text-left">
+              <p className="font-medium text-gray-900 dark:text-white"> Maya</p>
+              <p className="text-sm text-gray-600 dark:text-gray-400">Mobile wallet</p>
             </div>
           </button>
         </div>
       </div>
 
-      {/* Payment History */}
+      {/* Payment History Section */}
       <div>
         <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-4">
           Payment History
         </h3>
         <div className="overflow-x-auto">
-          <table className="w-full">
+          <table className="w-full text-sm">
             <thead>
               <tr className="text-left border-b dark:border-gray-700">
                 <th className="pb-3 text-gray-900 dark:text-white">Type</th>
@@ -69,11 +88,13 @@ export default function PaymentSection() {
                   <td className="py-4 text-gray-900 dark:text-white">{payment.type}</td>
                   <td className="py-4 text-gray-900 dark:text-white">₱{payment.amount}</td>
                   <td className="py-4">
-                    <span className={`px-2 py-1 rounded-full text-xs ${
-                      payment.status === 'paid' 
-                        ? 'bg-green-100 text-green-600' 
-                        : 'bg-yellow-100 text-yellow-600'
-                    }`}>
+                    <span
+                      className={`px-2 py-1 rounded-full text-xs font-medium ${
+                        payment.status === 'paid'
+                          ? 'bg-green-100 text-green-600'
+                          : 'bg-yellow-100 text-yellow-600'
+                      }`}
+                    >
                       {payment.status.charAt(0).toUpperCase() + payment.status.slice(1)}
                     </span>
                   </td>
@@ -95,19 +116,17 @@ export default function PaymentSection() {
         </div>
       </div>
 
-      {/* Payment Guidelines */}
+      {/* Payment Guidelines Section */}
       <div className="mt-8 p-4 border dark:border-gray-700 rounded-lg bg-gray-50 dark:bg-gray-900">
         <div className="flex items-start gap-3">
           <AlertCircle className="text-[#24FE41]" size={24} />
           <div>
-            <h4 className="font-medium text-gray-900 dark:text-white">
-              Payment Information
-            </h4>
+            <h4 className="font-medium text-gray-900 dark:text-white">Payment Information</h4>
             <ul className="mt-2 space-y-2 text-sm text-gray-600 dark:text-gray-400">
-              <li>• Annual fees are due at the start of each school year</li>
-              <li>• Gate pass renewals can be paid quarterly</li>
-              <li>• Late payments may incur additional fees</li>
-              <li>• Receipts are automatically generated for all payments</li>
+              <li>• Annual fees are due at the start of each school year.</li>
+              <li>• Gate pass renewals can be paid quarterly.</li>
+              <li>• Late payments may incur additional fees.</li>
+              <li>• Receipts are automatically generated for all payments.</li>
             </ul>
           </div>
         </div>

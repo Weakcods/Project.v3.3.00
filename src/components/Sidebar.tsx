@@ -1,4 +1,5 @@
-import { Home, UserPlus, Clock, Settings, Users, Shield, BarChart } from 'lucide-react';
+import { Home, UserPlus , Settings, Users, Shield, BarChart,MessageSquareText  } from 'lucide-react';
+import { CreditCard  } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
 import { useAuthStore } from '../stores/authStore';
 
@@ -12,8 +13,9 @@ export default function Sidebar({ isOpen }: SidebarProps) {
   const userNavigation = [
     { name: 'Dashboard', icon: Home, href: '/dashboard/user' },
     { name: 'Request Pass', icon: UserPlus, href: '/requests' },
-    { name: 'Access Logs', icon: Clock, href: '/logs' },
+    { name: 'View Passes', icon: CreditCard  , href: '/logs' },
     { name: 'Settings', icon: Settings, href: '/settings' },
+    {name: 'Feedback', icon: MessageSquareText ,href: '/feedback'}
   ];
 
   const adminNavigation = [
