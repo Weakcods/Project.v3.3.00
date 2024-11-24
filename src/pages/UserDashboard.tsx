@@ -4,7 +4,7 @@ import DashboardStats from './user/DashboardStat';
 import RequirementsSection from './user/RequirementSection';
 import PaymentSection from './user/PaymentSection';
 import ActivitySection from './user/ActivitySection';
-import UserSettings from './user/UserSetting';
+
 
 export default function UserDashboard() {
   const { user } = useAuthStore();
@@ -59,10 +59,6 @@ export default function UserDashboard() {
           
           {activeSection === 'payments' && (
             <PaymentSection />
-          )}
-          
-          {activeSection === 'settings' && (
-            <UserSettings />
           )}
         </div>
       </div>

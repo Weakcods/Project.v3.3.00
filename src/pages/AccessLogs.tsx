@@ -2,9 +2,9 @@ import { useState } from 'react';
 import { Search, Filter, Download, Calendar } from 'lucide-react';
 
 const logs = [
-  { id: 1, name: 'John Smith', type: 'Entry', location: 'Main Gate', timestamp: '2024-03-15 09:30:45', status: 'success' },
-  { id: 2, name: 'Lisa Johnson', type: 'Exit', location: 'Main Gate', timestamp: '2024-03-15 10:15:22', status: 'success' },
-  { id: 3, name: 'Mike Brown', type: 'Entry', location: 'Side Gate', timestamp: '2024-03-15 11:45:10', status: 'denied' },
+  { id: 1, name: 'James Brown', type: 'Entry', location: 'Main Gate', timestamp: '2024-03-15 09:30:45', status: 'success' },
+  { id: 2, name: 'James Brown', type: 'Exit', location: 'Main Gate', timestamp: '2024-03-15 10:15:22', status: 'success' },
+  { id: 3, name: 'James Brown', type: 'Entry', location: 'Side Gate', timestamp: '2024-03-15 11:45:10', status: 'denied' },
 ];
 
 export default function AccessLogs() {
@@ -22,7 +22,7 @@ export default function AccessLogs() {
           </button>
           <button className="btn-primary flex items-center gap-2">
             <Download size={20} />
-            <span>Export</span>
+            <span>Export Logs</span>
           </button>
         </div>
       </div>
