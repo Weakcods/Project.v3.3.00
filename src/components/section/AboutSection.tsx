@@ -1,4 +1,4 @@
-import { Shield, Users, Lock, Zap, Github, Linkedin, Twitter } from 'lucide-react';
+import { Shield, Users, Lock, Zap, Facebook, Instagram, Twitter } from 'lucide-react';
 import { motion } from 'framer-motion';
 import StatsCard from '../Aboutcardsection';
 
@@ -16,7 +16,7 @@ export default function AboutSection() {
       image: "/Public/images/jas.jpg",
       bio: "10+ years in sa Pilipinas ,madami Chix",
       social: {
-        linkedin: "#",
+        facebook: "#",
         twitter: "#",
         github: "#"
       }
@@ -27,9 +27,9 @@ export default function AboutSection() {
       image: "/Public/images/mart.jpg",
       bio: "Former chief of campus security",
       social: {
-        linkedin: "#",
+        instagram: "#",
         twitter: "#",
-        github: "#"
+        facebook: "#"
       }
     },
     {
@@ -38,9 +38,9 @@ export default function AboutSection() {
       image: "/Public/images/noe.jpg",
       bio: "Specialist in user-centered design",
       social: {
-        linkedin: "#",
+        instagram: "#",
         twitter: "#",
-        github: "#"
+        facebook: "#"
       }
     },
     {
@@ -49,9 +49,9 @@ export default function AboutSection() {
       image: "/Public/images/me.jpg",
       bio: "Full-stack developer & security expert",
       social: {
-        linkedin: "#",
+        instagram: "#",
         twitter: "#",
-        github: "#"
+        facebook: "#"
       }
     }
   ];
@@ -109,14 +109,14 @@ export default function AboutSection() {
                     className="text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
                     aria-label={`${member.name}'s GitHub`}
                   >
-                    <Github className="w-5 h-5" />
+                    <Facebook className="w-5 h-5" />
                   </a>
                   <a 
                     href={member.social.linkedin} 
                     className="text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
                     aria-label={`${member.name}'s LinkedIn`}
                   >
-                    <Linkedin className="w-5 h-5" />
+                    <Instagram className="w-5 h-5" />
                   </a>
                   <a 
                     href={member.social.twitter} 

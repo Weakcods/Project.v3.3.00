@@ -1,5 +1,4 @@
-import {  Shield, Clock } from 'lucide-react';
-import { CheckCircle, Phone, Mail, MapPin, Facebook, Twitter, Instagram, Linkedin, } from 'lucide-react';
+import {  Shield,Phone, Mail, MapPin, Facebook, Twitter, Instagram, Linkedin, } from 'lucide-react';
 import Header from '../components/Header';
 import AboutSection from '../components/section/AboutSection';
 import TestimonialsSection from '../components/section/Testimonial';
@@ -10,9 +9,7 @@ export default function Landing() {
   return (
     <div className="bg-white dark:bg-gray-900 transition-colors duration-200">
       <Header />
-      
       <HeroSection/>
-      
       <HowItWorks/>
       <AboutSection />
       <TestimonialsSection />

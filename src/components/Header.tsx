@@ -24,7 +24,7 @@ export default function Header() {
 
   const navItems = [
     { href: '#how-it-works', label: 'How it Works' },
-    { href: '#testimonials', label: 'Testimonials' },
+    { href: '#Testimonials', label: 'Testimonials' },
     { href: '#about', label: 'About Us' },
     { href: '#contact', label: 'Contact' },
   ];
@@ -76,17 +76,7 @@ export default function Header() {
             </nav>
 
             <div className="flex items-center space-x-4">
-              <button
-                onClick={toggleTheme}
-                className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#24FE41]/50"
-                aria-label="Toggle theme"
-              >
-                {theme === 'light' ? (
-                  <Moon size={20} className="text-gray-600 dark:text-white transition-colors duration-300" />
-                ) : (
-                  <Sun size={20} className="text-yellow-500 dark:text-white transition-colors duration-300" />
-                )}
-              </button>
+             
 
               <Link
                 to="/login"
@@ -102,6 +92,19 @@ export default function Header() {
               >
                 Create Account
               </Link>
+
+              <button
+                onClick={toggleTheme}
+                className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#24FE41]/50"
+                aria-label="Toggle theme"
+              >
+                {theme === 'light' ? (
+                  <Moon size={20} className="text-gray-600 dark:text-white transition-colors duration-300" />
+                ) : (
+                  <Sun size={20} className="text-yellow-500 dark:text-white transition-colors duration-300" />
+                )}
+              </button>
+              
             </div>
           </div>
 
