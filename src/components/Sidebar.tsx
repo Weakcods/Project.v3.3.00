@@ -1,5 +1,5 @@
 import { Home, UserPlus , Settings, Users, Shield, BarChart,MessageSquareText  } from 'lucide-react';
-import { CreditCard  } from 'lucide-react';
+import { CreditCard,MessageSquareDot  } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
 import { useAuthStore } from '../stores/authStore';
 
@@ -23,6 +23,8 @@ export default function Sidebar({ isOpen }: SidebarProps) {
     { name: 'Security', icon: Shield, href: '/security' },
     { name: 'Analytics', icon: BarChart, href: '/analytics' },
     { name: 'User Management', icon: Users, href: '/users' },
+    { name: 'User Information', icon: MessageSquareDot, href: '' },
+    { name: 'User Feedback', icon: MessageSquareDot, href: '' },
     { name: 'Settings', icon: Settings, href: '/settings' },
   ];
 
