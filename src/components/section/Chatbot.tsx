@@ -54,7 +54,7 @@ export default function ChatBot() {
 
     if (lowerCaseMessage.includes('gatepass') || lowerCaseMessage.includes('entry pass') || lowerCaseMessage.includes('authorization')) {
       botMessageText = `
-        A **Gatepass** is a document or digital authorization that allows an individual to enter or leave a restricted area, such as a building, office, or construction site. 
+        A Gatepass is a document or digital authorization that allows an individual to enter or leave a restricted area, such as a building, office, or construction site. 
         It usually includes details like the person's name, purpose of visit, entry and exit times, and approval signatures.
 
         Here are some frequently asked questions about gatepasses:
