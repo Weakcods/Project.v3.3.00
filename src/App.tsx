@@ -15,6 +15,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 import Layout from './components/Layout';
 //import UserSettings from './pages/user/UserSettings';
 import ProfileForm from './components/ProfileForm';
+import FeedbackSection from './pages/Feedback';
 
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
               <Route path="/logs" element={<AccessLogs />} />
               <Route path="/settings" element={<Settings />} />
               <Route path="/settings/profile" element={<ProfileForm/>} />  {/*  edit this to link another pages*/}
+              <Route path="/feedback" element={<FeedbackSection />} />
             </Route>
           </Route>
 

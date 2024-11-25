@@ -60,20 +60,21 @@ export default function Navbar({ onMenuClick }: NavbarProps) {
                 className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
                 aria-label={theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}
               >
-                {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
+                {theme === 'light' ? (
+                  <Moon size={20} />
+                ) : (
+                  <Sun size={20} className="text-white" />
+                )}
               </button>
               
               <div className="relative" ref={userMenuRef}>
                 <button
                   onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
-                  className="flex items-center space-x-2 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                  className="flex items-center justify-center w-8 h-8 rounded-full bg-[#24FE41] text-white hover:bg-[#1F9A35] hover:scale-105 hover:shadow-md transition-all duration-200"
                   aria-expanded={isUserMenuOpen}
                   aria-haspopup="true"
                 >
-                  <div className="w-8 h-8 rounded-full bg-[#24FE41] flex items-center justify-center text-white">
-                    <User size={16} />
-                  </div>
-                  <span className="hidden sm:block">{user?.name}</span>
+                  <User size={16} />
                 </button>
 
                 {/* User Menu Dropdown */}

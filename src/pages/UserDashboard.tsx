@@ -4,9 +4,11 @@ import DashboardStats from './user/DashboardStat';
 import RequirementsSection from './user/RequirementSection';
 import PaymentSection from './user/PaymentSection';
 import ActivitySection from './user/ActivitySection';
+import { useNavigate } from 'react-router-dom';
 
 export default function UserDashboard() {
-  const { user } = useAuthStore();
+  const { user} = useAuthStore();  // Assuming you have isLoading to track auth loading state
+  const navigate = useNavigate();
   const [activeSection, setActiveSection] = useState('overview');
 
   return (
@@ -16,7 +18,7 @@ export default function UserDashboard() {
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
-              Welcome, {user?.name}!
+              Welcome, {user?.name || user?.email.split('@')[0]}!
             </h1>
             <p className="text-gray-600 dark:text-gray-400">
               Manage your gate passes and requirements
@@ -49,14 +51,9 @@ export default function UserDashboard() {
               <ActivitySection />
             </>
           )}
-          
-          {activeSection === 'requirements' && (
-            <RequirementsSection />
-          )}
-          
-          {activeSection === 'payments' && (
-            <PaymentSection />
-          )}
+
+          {activeSection === 'requirements' && <RequirementsSection />}
+          {activeSection === 'payments' && <PaymentSection />}
         </div>
       </div>
     </div>
