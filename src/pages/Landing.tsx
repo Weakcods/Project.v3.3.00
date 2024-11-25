@@ -4,6 +4,7 @@ import AboutSection from '../components/section/AboutSection';
 import TestimonialsSection from '../components/section/Testimonial';
 import HeroSection from '../components/section/Herosection';
 import HowItWorks from '../components/section/HowItworks';
+import ChatBot from '../components/section/Chatbot';
 
 export default function Landing() {
   return (
@@ -132,6 +133,7 @@ export default function Landing() {
           </div>
         </div>
       </footer>
+      <ChatBot/>
     </div>
   );
 }

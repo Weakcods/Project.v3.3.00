@@ -1,4 +1,4 @@
-import { Shield, Users, Lock, Zap, Facebook, Instagram, Twitter } from 'lucide-react';
+import { Shield, Users,  Zap, Facebook, Instagram, Twitter } from 'lucide-react';
 import { motion } from 'framer-motion';
 import StatsCard from '../Aboutcardsection';
 
@@ -12,9 +12,9 @@ export default function AboutSection() {
   const teamMembers = [
     {
       name: "Jasper Brix Olpos",
-      role: " Pancit canton/kape",
+      role: "Pancit canton/kape",
       image: "/Public/images/jas.jpg",
-      bio: "10+ years in sa Pilipinas ,madami Chix",
+      bio: "10+ years in sa Pilipinas, madami Chix",
       social: {
         facebook: "#",
         twitter: "#",
@@ -23,7 +23,7 @@ export default function AboutSection() {
     },
     {
       name: "Reymart Azucena",
-      role: "Debuger/Consultant",
+      role: "Debugger/Consultant",
       image: "/Public/images/mart.jpg",
       bio: "Former chief of campus security",
       social: {
@@ -45,7 +45,7 @@ export default function AboutSection() {
     },
     {
       name: "Joshua Bacay",
-      role: "Lead Developer/Ui-Ux Designer",
+      role: "Lead Developer/UI/UX Designer",
       image: "/Public/images/me.jpg",
       bio: "Full-stack developer & security expert",
       social: {
@@ -77,7 +77,7 @@ export default function AboutSection() {
           We're dedicated to making campus access control simple, secure, and efficient. Our digital gate pass system 
           revolutionizes how educational institutions manage their security and access control.
         </motion.p>
-        
+
         {/* Team Section */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 mb-16 sm:mb-20">
           {teamMembers.map((member, index) => (
@@ -104,27 +104,33 @@ export default function AboutSection() {
                   {member.bio}
                 </p>
                 <div className="flex space-x-4">
-                  <a 
-                    href={member.social.github} 
-                    className="text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
-                    aria-label={`${member.name}'s GitHub`}
-                  >
-                    <Facebook className="w-5 h-5" />
-                  </a>
-                  <a 
-                    href={member.social.linkedin} 
-                    className="text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
-                    aria-label={`${member.name}'s LinkedIn`}
-                  >
-                    <Instagram className="w-5 h-5" />
-                  </a>
-                  <a 
-                    href={member.social.twitter} 
-                    className="text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
-                    aria-label={`${member.name}'s Twitter`}
-                  >
-                    <Twitter className="w-5 h-5" />
-                  </a>
+                  {member.social.facebook && (
+                    <a 
+                      href={member.social.facebook} 
+                      className="text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
+                      aria-label={`${member.name}'s Facebook`}
+                    >
+                      <Facebook className="w-5 h-5" />
+                    </a>
+                  )}
+                  {member.social.instagram && (
+                    <a 
+                      href={member.social.instagram} 
+                      className="text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
+                      aria-label={`${member.name}'s Instagram`}
+                    >
+                      <Instagram className="w-5 h-5" />
+                    </a>
+                  )}
+                  {member.social.twitter && (
+                    <a 
+                      href={member.social.twitter} 
+                      className="text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
+                      aria-label={`${member.name}'s Twitter`}
+                    >
+                      <Twitter className="w-5 h-5" />
+                    </a>
+                  )}
                 </div>
               </div>
             </motion.div>

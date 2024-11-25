@@ -1,4 +1,5 @@
 import { Quote } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 const testimonials = [
   {
@@ -29,19 +30,28 @@ const testimonials = [
 
 export default function TestimonialsSection() {
   return (
-    <section  id='Testimonials' className="py-24 bg-white dark:bg-gray-900 transition-colors">
+    <section id="Testimonials" className="py-24 bg-white dark:bg-gray-900 transition-colors">
       <div className="container mx-auto px-6">
         <h2 className="text-4xl font-bold text-gray-900 dark:text-white text-center mb-16">
           What Our Users Say
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.2, duration: 0.6 }}
+        >
           {testimonials.map((testimonial, index) => (
-            <div
+            <motion.div
               key={index}
               className="bg-gray-50 dark:bg-gray-800 rounded-xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out hover:scale-105"
-              style={{ 
-                opacity: 0,
-                animation: `fadeIn 0.6s ease-out forwards ${index * 0.2}s`
+              initial={{ x: 100, opacity: 0 }} // Start from the right with opacity 0
+              animate={{ x: 0, opacity: 1 }}   // Move to the center with full opacity
+              transition={{
+                delay: index * 0.3,   // Staggered delay for each testimonial
+                type: "spring",
+                stiffness: 50,        // Smooth animation
+                damping: 25
               }}
             >
               <div className="flex items-start mb-6">
@@ -66,9 +76,9 @@ export default function TestimonialsSection() {
                   "{testimonial.content}"
                 </p>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
