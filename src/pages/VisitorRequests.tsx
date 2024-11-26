@@ -12,9 +12,9 @@ interface Request {
 }
 
 const initialRequests: Request[] = [
-  { id: 1, name: 'James Brown', type: 'Interview', location: 'Meeting Room A', date: '2024-03-15', time: '10:00 AM', status: 'pending' },
-  { id: 2, name: 'Sarah Wilson', type: 'Delivery', location: 'Reception', date: '2024-03-15', time: '11:30 AM', status: 'approved' },
-  { id: 3, name: 'Michael Chen', type: 'Meeting', location: 'Conference Room B', date: '2024-03-15', time: '2:00 PM', status: 'rejected' },
+  { id: 1, name: 'Noe Dela Concepcion', type: 'Interview', location: 'Meeting Room A', date: '2024-03-15', time: '10:00 AM', status: 'pending' },
+  { id: 2, name: 'Noe Dela Concepcion', type: 'Delivery', location: 'Reception', date: '2024-03-15', time: '11:30 AM', status: 'approved' },
+  { id: 3, name: 'Noe Dela Concepcion', type: 'Meeting', location: 'Conference Room B', date: '2024-03-15', time: '2:00 PM', status: 'rejected' },
 ];
 
 export default function VisitorHistory() {

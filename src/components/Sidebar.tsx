@@ -26,6 +26,7 @@ export default function Sidebar({ isOpen }: SidebarProps) {
     { name: 'User Information', icon: MessageSquareDot, href: '/user-info' },
     { name: 'User Feedback', icon: MessageSquareDot, href: '/feedback' },
     { name: 'Settings', icon: Settings, href: '/settings' },
+    { name: 'Payment', icon: Settings, href: '' },
   ];
 
   const navigation = user?.role === 'admin' ? adminNavigation : userNavigation;

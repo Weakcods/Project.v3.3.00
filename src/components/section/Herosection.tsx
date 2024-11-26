@@ -21,7 +21,7 @@ export default function HeroSection() {
   return (
     <section className="relative min-h-[90vh] flex items-center overflow-hidden">
       {/* Background Elements */}
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
@@ -45,15 +45,34 @@ export default function HeroSection() {
               </span>
             </motion.div>
 
-            <motion.h1 
-              variants={fadeInUp}
-              className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white mb-6 transition-colors"
-            >
-              Guardian Gate Pass
-              <span className="text-[#1ee539] dark:text-[#24FE41] block mt-2">
-                for Palawan University
-              </span>
-            </motion.h1>
+            <motion.h1
+  variants={fadeInUp}
+  className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white mb-6 transition-colors ease-in-out duration-300"
+  aria-label="Guardian Gate for Palawan State University"
+>
+  {/* Gradient for Guardian Gate */}
+  <span
+    className="bg-clip-text text-transparent bg-gradient-to-r from-[#FDFC47] to-[#24FE41]"
+  >
+    Guardian Gate
+  </span>
+  
+  {/* Gradient for Palawan State University */}
+  <span 
+    className="block mt-2 sm:mt-3 text-lg sm:text-xl"
+    aria-label="Subtitle: for Palawan State University"
+  >
+    <span className="text-base sm:text-lg text-gray-900 dark:text-white">for</span> {/* Keep "for" small */}
+    <span 
+      className="ml-1 text-xl sm:text-2xl font-semibold bg-clip-text text-transparent bg-gradient-to-r from-[#f12711] to-[#f5af19]"
+    >
+      Palawan State University
+    </span>
+  </span>
+</motion.h1>
+
+
+
 
             <motion.p 
               variants={fadeInUp}
