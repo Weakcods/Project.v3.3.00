@@ -23,8 +23,8 @@ export default function Sidebar({ isOpen }: SidebarProps) {
     { name: 'Security', icon: Shield, href: '/security' },
     { name: 'Analytics', icon: BarChart, href: '/analytics' },
     { name: 'User Management', icon: Users, href: '/users' },
-    { name: 'User Information', icon: MessageSquareDot, href: '' },
-    { name: 'User Feedback', icon: MessageSquareDot, href: '' },
+    { name: 'User Information', icon: MessageSquareDot, href: '/user-info' },
+    { name: 'User Feedback', icon: MessageSquareDot, href: '/feedback' },
     { name: 'Settings', icon: Settings, href: '/settings' },
   ];
 

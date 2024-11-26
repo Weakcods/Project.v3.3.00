@@ -13,10 +13,10 @@ import UserManagement from './pages/UserManagement';
 import Settings from './pages/user/Settings';
 import ProtectedRoute from './components/ProtectedRoute';
 import Layout from './components/Layout';
-//import UserSettings from './pages/user/UserSettings';
 import ProfileForm from './components/ProfileForm';
 import FeedbackSection from './pages/Feedback';
-
+import UserInfo from './pages/UserInfo';
+import UserFeedback from './pages/UserFeedback';
 
 function App() {
   const { theme } = useThemeStore();
@@ -28,7 +28,7 @@ function App() {
           <Route path="/" element={<Landing />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          
+
           {/* User Routes */}
           <Route element={<ProtectedRoute />}>
             <Route element={<Layout />}>
@@ -36,8 +36,8 @@ function App() {
               <Route path="/requests" element={<VisitorRequests />} />
               <Route path="/logs" element={<AccessLogs />} />
               <Route path="/settings" element={<Settings />} />
-              <Route path="/settings/profile" element={<ProfileForm/>} />  {/*  edit this to link another pages*/}
-              <Route path="/feedback" element={<FeedbackSection />} />
+              <Route path="/settings/profile" element={<ProfileForm />} />
+              <Route path="/feedbackuser" element={<FeedbackSection />} />
             </Route>
           </Route>
 
@@ -48,6 +48,9 @@ function App() {
               <Route path="/security" element={<Security />} />
               <Route path="/analytics" element={<Analytics />} />
               <Route path="/users" element={<UserManagement />} />
+              <Route path="/feedback" element={<UserFeedback />} />
+              <Route path="/user-info" element={<UserInfo />} />
+              <Route path="/settings" element={<Settings />} />
             </Route>
           </Route>
 
@@ -56,7 +59,8 @@ function App() {
             path="/dashboard"
             element={
               <ProtectedRoute>
-                <Navigate to="/dashboard/user" replace />
+                {/* Dynamically navigate to the appropriate dashboard based on role */}
+                <Navigate to="/dashboard/user" replace /> {/* Update this if you want role-based redirect */}
               </ProtectedRoute>
             }
           />
