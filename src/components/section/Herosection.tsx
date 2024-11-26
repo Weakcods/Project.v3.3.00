@@ -27,9 +27,7 @@ export default function HeroSection() {
         transition={{ duration: 1 }}
         className="absolute inset-0 bg-gradient-to-r from-[#24FE41]/10 to-[#1ee539]/10 dark:from-[#24FE41]/5 dark:to-[#1ee539]/5"
       />
-      
       <div className="absolute inset-0 bg-[url('/gate-pass-pattern.svg')] opacity-5 dark:opacity-10" />
-
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-24">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left Content */}
@@ -46,34 +44,30 @@ export default function HeroSection() {
             </motion.div>
 
             <motion.h1
-  variants={fadeInUp}
-  className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white mb-6 transition-colors ease-in-out duration-300"
-  aria-label="Guardian Gate for Palawan State University"
->
-  {/* Gradient for Guardian Gate */}
-  <span
-    className="bg-clip-text text-transparent bg-gradient-to-r from-[#FDFC47] to-[#24FE41]"
-  >
-    Guardian Gate
-  </span>
-  
-  {/* Gradient for Palawan State University */}
-  <span 
-    className="block mt-2 sm:mt-3 text-lg sm:text-xl"
-    aria-label="Subtitle: for Palawan State University"
-  >
-    <span className="text-base sm:text-lg text-gray-900 dark:text-white">for</span> {/* Keep "for" small */}
-    <span 
-      className="ml-1 text-xl sm:text-2xl font-semibold bg-clip-text text-transparent bg-gradient-to-r from-[#f12711] to-[#f5af19]"
-    >
-      Palawan State University
-    </span>
-  </span>
-</motion.h1>
-
-
-
-
+              variants={fadeInUp}
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white mb-6 transition-colors ease-in-out duration-300"
+              aria-label="Guardian Gate for Palawan State University"
+            >
+              {/* Gradient for Guardian Gate */}
+              <span
+                className="bg-clip-text text-transparent bg-gradient-to-r from-[#FDFC47] to-[#24FE41]"
+              >
+                Guardian Gate
+              </span>
+              
+              {/* Gradient for Palawan State University */}
+              <span 
+                className="block mt-2 sm:mt-3 text-lg sm:text-xl"
+                aria-label="Subtitle: for Palawan State University"
+              >
+                <span className="text-base sm:text-lg text-gray-900 dark:text-white">for</span> {/* Keep "for" small */}
+                <span 
+                  className="ml-1 text-xl sm:text-2xl font-semibold bg-clip-text text-transparent bg-gradient-to-r from-[#f12711] to-[#f5af19]"
+                >
+                  Palawan State University
+                </span>
+              </span>
+            </motion.h1>
             <motion.p 
               variants={fadeInUp}
               className="text-lg md:text-xl text-gray-700 dark:text-gray-200 mb-8 max-w-2xl lg:max-w-none mx-auto lg:mx-0 transition-colors"
