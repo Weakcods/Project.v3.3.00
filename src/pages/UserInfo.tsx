@@ -1,7 +1,18 @@
 import { useState } from 'react';
-import { Search, Filter, Download, User, Mail, Phone, MapPin } from 'lucide-react';
+import { Search, Filter, Download, User, Mail, Phone, MapPin, Plus, Edit2, Trash2 } from 'lucide-react';
 
-const userInfo = [
+interface UserData {
+  id: number;
+  name: string;
+  email: string;
+  phone: string;
+  department: string;
+  address: string;
+  status: 'active' | 'inactive';
+  lastActive: string;
+}
+
+const initialUserInfo: UserData[] = [
   {
     id: 1,
     name: 'John Doe',
@@ -25,17 +36,72 @@ const userInfo = [
 ];
 
 export default function UserInfo() {
+  const [users, setUsers] = useState<UserData[]>(initialUserInfo);
   const [searchTerm, setSearchTerm] = useState('');
   const [filterDepartment, setFilterDepartment] = useState('all');
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [editingUser, setEditingUser] = useState<UserData | null>(null);
+  const [formData, setFormData] = useState<Partial<UserData>>({});
+
+  const handleCreate = () => {
+    setEditingUser(null);
+    setFormData({});
+    setIsModalOpen(true);
+  };
+
+  const handleEdit = (user: UserData) => {
+    setEditingUser(user);
+    setFormData(user);
+    setIsModalOpen(true);
+  };
+
+  const handleDelete = (id: number) => {
+    if (confirm('Are you sure you want to delete this user?')) {
+      setUsers(users.filter(user => user.id !== id));
+    }
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (editingUser) {
+      setUsers(users.map(user => 
+        user.id === editingUser.id ? { ...user, ...formData } : user
+      ));
+    } else {
+      setUsers([...users, { 
+        ...formData as UserData,
+        id: Math.max(...users.map(u => u.id)) + 1,
+        lastActive: new Date().toLocaleString()
+      }]);
+    }
+    setIsModalOpen(false);
+  };
+
+  const filteredUsers = users.filter(user => {
+    const matchesSearch = user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         user.email.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesDepartment = filterDepartment === 'all' || 
+                             user.department.toLowerCase().includes(filterDepartment.toLowerCase());
+    return matchesSearch && matchesDepartment;
+  });
 
   return (
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <h1 className="text-2xl font-bold text-gray-900 dark:text-white">User Information</h1>
-        <button className="btn-primary flex items-center gap-2">
-          <Download size={20} />
-          Export Data
-        </button>
+        <div className="flex gap-2">
+          <button 
+            onClick={handleCreate}
+            className="btn-primary flex items-center gap-2"
+          >
+            <Plus size={20} />
+            Add User
+          </button>
+          <button className="btn-primary flex items-center gap-2">
+            <Download size={20} />
+            Export Data
+          </button>
+        </div>
       </div>
 
       <div className="card">
@@ -65,7 +131,7 @@ export default function UserInfo() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {userInfo.map((user) => (
+          {filteredUsers.map((user) => (
             <div key={user.id} className="p-6 rounded-lg bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all">
               <div className="flex items-start justify-between mb-4">
                 <div className="flex items-center gap-3">
@@ -77,13 +143,27 @@ export default function UserInfo() {
                     <p className="text-sm text-gray-600 dark:text-gray-400">{user.department}</p>
                   </div>
                 </div>
-                <span className={`px-2 py-1 rounded-full text-xs ${
-                  user.status === 'active' 
-                    ? 'bg-green-100 text-green-600 dark:bg-green-900 dark:text-green-400'
-                    : 'bg-red-100 text-red-600 dark:bg-red-900 dark:text-red-400'
-                }`}>
-                  {user.status}
-                </span>
+                <div className="flex items-center gap-2">
+                  <span className={`px-2 py-1 rounded-full text-xs ${
+                    user.status === 'active' 
+                      ? 'bg-green-100 text-green-600 dark:bg-green-900 dark:text-green-400'
+                      : 'bg-red-100 text-red-600 dark:bg-red-900 dark:text-red-400'
+                  }`}>
+                    {user.status}
+                  </span>
+                  <button 
+                    onClick={() => handleEdit(user)}
+                    className="p-1 hover:bg-gray-200 dark:hover:bg-gray-600 rounded-full transition-colors"
+                  >
+                    <Edit2 size={16} className="text-blue-500" />
+                  </button>
+                  <button 
+                    onClick={() => handleDelete(user.id)}
+                    className="p-1 hover:bg-gray-200 dark:hover:bg-gray-600 rounded-full transition-colors"
+                  >
+                    <Trash2 size={16} className="text-red-500" />
+                  </button>
+                </div>
               </div>
 
               <div className="space-y-3">
@@ -110,6 +190,108 @@ export default function UserInfo() {
           ))}
         </div>
       </div>
+
+      {/* Modal for Create/Edit */}
+      {isModalOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+          <div className="bg-white dark:bg-gray-800 rounded-lg p-6 w-full max-w-md">
+            <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-white">
+              {editingUser ? 'Edit User' : 'Add New User'}
+            </h2>
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                  Name
+                </label>
+                <input
+                  type="text"
+                  value={formData.name || ''}
+                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  className="input-field"
+                  required
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                  Email
+                </label>
+                <input
+                  type="email"
+                  value={formData.email || ''}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  className="input-field"
+                  required
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                  Phone
+                </label>
+                <input
+                  type="tel"
+                  value={formData.phone || ''}
+                  onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                  className="input-field"
+                  required
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                  Department
+                </label>
+                <input
+                  type="text"
+                  value={formData.department || ''}
+                  onChange={(e) => setFormData({ ...formData, department: e.target.value })}
+                  className="input-field"
+                  required
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                  Address
+                </label>
+                <input
+                  type="text"
+                  value={formData.address || ''}
+                  onChange={(e) => setFormData({ ...formData, address: e.target.value })}
+                  className="input-field"
+                  required
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                  Status
+                </label>
+                <select
+                  value={formData.status || 'active'}
+                  onChange={(e) => setFormData({ ...formData, status: e.target.value as 'active' | 'inactive' })}
+                  className="input-field"
+                  required
+                >
+                  <option value="active">Active</option>
+                  <option value="inactive">Inactive</option>
+                </select>
+              </div>
+              <div className="flex justify-end gap-2 mt-6">
+                <button
+                  type="button"
+                  onClick={() => setIsModalOpen(false)}
+                  className="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="btn-primary"
+                >
+                  {editingUser ? 'Update' : 'Create'}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
