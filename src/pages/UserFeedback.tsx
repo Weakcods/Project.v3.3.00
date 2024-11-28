@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Search, Filter, ThumbsUp, ThumbsDown, MessageCircle, Plus, Edit2, Trash2 } from 'lucide-react';
+import { Search, Filter, ThumbsUp, ThumbsDown, MessageCircle, Plus, Edit2, Trash2, Reply, Send, X } from 'lucide-react';
 
 interface Feedback {
   id: number;
@@ -9,35 +9,60 @@ interface Feedback {
   rating: number;
   date: string;
   status: 'positive' | 'negative' | 'suggestion';
+  replies?: Reply[];
+}
+
+interface Reply {
+  id: number;
+  adminName: string;
+  message: string;
+  date: string;
 }
 
 const initialFeedbacks: Feedback[] = [
   {
     id: 1,
-    user: 'John Doe',
+    user: 'Reymart Azucena',
     type: 'Gate Access',
     message: 'The new QR code system is much faster than the old card system.',
     rating: 5,
     date: '2024-03-15',
-    status: 'positive'
+    status: 'positive',
+    replies: [
+      {
+        id: 1,
+        adminName: 'Admin Joshua',
+        message: 'Thank you for your positive feedback! Were glad the new system is working well for you',
+        date: '2024-03-15 14:30'
+      }
+    ]
   },
   {
     id: 2,
-    user: 'Jane Smith',
+    user: 'Jasper Brix Olpos',
     type: 'App Interface',
     message: 'Would be great to have push notifications for pass approvals.',
     rating: 4,
     date: '2024-03-14',
-    status: 'suggestion'
+    status: 'suggestion',
+    replies: []
   },
   {
     id: 3,
-    user: 'Mike Johnson',
+    user: 'Noe Dela Conception',
     type: 'Security',
     message: 'Sometimes the scanner takes too long to read the QR code.',
     rating: 2,
     date: '2024-03-13',
-    status: 'negative'
+    status: 'negative',
+    replies: [
+      {
+        id: 2,
+        adminName: 'Admin josh',
+        message: 'We apologize for the inconvenience. Our team is working on optimizing the scanner performance.',
+        date: '2024-03-13 16:45'
+      }
+    ]
   }
 ];
 
@@ -46,8 +71,11 @@ export default function UserFeedback() {
   const [searchTerm, setSearchTerm] = useState('');
   const [filterType, setFilterType] = useState('all');
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isReplyModalOpen, setIsReplyModalOpen] = useState(false);
   const [editingFeedback, setEditingFeedback] = useState<Feedback | null>(null);
+  const [replyingTo, setReplyingTo] = useState<Feedback | null>(null);
   const [formData, setFormData] = useState<Partial<Feedback>>({});
+  const [replyText, setReplyText] = useState('');
 
   const handleCreate = () => {
     setEditingFeedback(null);
@@ -67,6 +95,34 @@ export default function UserFeedback() {
     }
   };
 
+  const handleReply = (feedback: Feedback) => {
+    setReplyingTo(feedback);
+    setReplyText('');
+    setIsReplyModalOpen(true);
+  };
+
+  const handleSubmitReply = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!replyingTo) return;
+
+    const newReply: Reply = {
+      id: Date.now(),
+      adminName: 'Admin Joshua', // In a real app, get from auth context
+      message: replyText,
+      date: new Date().toLocaleString()
+    };
+
+    setFeedbacks(feedbacks.map(feedback => 
+      feedback.id === replyingTo.id
+        ? { ...feedback, replies: [...(feedback.replies || []), newReply] }
+        : feedback
+    ));
+
+    setIsReplyModalOpen(false);
+    setReplyText('');
+    setReplyingTo(null);
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (editingFeedback) {
@@ -77,7 +133,8 @@ export default function UserFeedback() {
       setFeedbacks([...feedbacks, { 
         ...formData as Feedback,
         id: Math.max(...feedbacks.map(f => f.id)) + 1,
-        date: new Date().toISOString().split('T')[0]
+        date: new Date().toISOString().split('T')[0],
+        replies: []
       }]);
     }
     setIsModalOpen(false);
@@ -95,7 +152,7 @@ export default function UserFeedback() {
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
           <h1 className="text-2xl font-bold text-gray-900 dark:text-white">User Feedback</h1>
-          <p className="text-gray-600 dark:text-gray-400">Monitor and analyze user feedback</p>
+          <p className="text-gray-600 dark:text-gray-400">Monitor and respond to user feedback</p>
         </div>
         <button 
           onClick={handleCreate}
@@ -159,8 +216,23 @@ export default function UserFeedback() {
                     </span>
                   </div>
                   <p className="text-gray-700 dark:text-gray-300">{feedback.message}</p>
+
+                  {/* Replies Section */}
+                  {feedback.replies && feedback.replies.length > 0 && (
+                    <div className="mt-4 pl-4 border-l-2 border-gray-200 dark:border-gray-700 space-y-3">
+                      {feedback.replies.map((reply) => (
+                        <div key={reply.id} className="bg-white dark:bg-gray-700 p-3 rounded-lg">
+                          <div className="flex items-center gap-2 mb-1">
+                            <span className="font-medium text-gray-900 dark:text-white">{reply.adminName}</span>
+                            <span className="text-xs text-gray-500 dark:text-gray-400">{reply.date}</span>
+                          </div>
+                          <p className="text-gray-700 dark:text-gray-300 text-sm">{reply.message}</p>
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </div>
-                <div className="flex items-center gap-2 ml-4">
+                <div className="flex items-center">
                   {feedback.status === 'positive' ? (
                     <ThumbsUp className="text-green-500" size={20} />
                   ) : feedback.status === 'negative' ? (
@@ -170,8 +242,16 @@ export default function UserFeedback() {
                   )}
                 </div>
               </div>
+
               <div className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-600">
                 <div className="flex items-center gap-4">
+                  <button
+                    onClick={() => handleReply(feedback)}
+                    className="text-sm text-gray-600 dark:text-gray-400 hover:text-[#24FE41] flex items-center gap-1"
+                  >
+                    <Reply size={16} />
+                    Reply
+                  </button>
                   <button
                     onClick={() => handleEdit(feedback)}
                     className="text-sm text-gray-600 dark:text-gray-400 hover:text-[#24FE41] flex items-center gap-1"
@@ -193,7 +273,63 @@ export default function UserFeedback() {
         </div>
       </div>
 
-      {/* Modal for Create/Edit */}
+      {/* Reply Modal */}
+      {isReplyModalOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+          <div className="bg-white dark:bg-gray-800 rounded-lg p-6 w-full max-w-md">
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Reply to Feedback</h2>
+              <button
+                onClick={() => setIsReplyModalOpen(false)}
+                className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+              >
+                <X size={20} />
+              </button>
+            </div>
+            
+            {replyingTo && (
+              <div className="mb-4 p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                <p className="text-sm text-gray-600 dark:text-gray-400">Original feedback:</p>
+                <p className="text-gray-900 dark:text-white">{replyingTo.message}</p>
+              </div>
+            )}
+
+            <form onSubmit={handleSubmitReply} className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                  Your Reply
+                </label>
+                <textarea
+                  value={replyText}
+                  onChange={(e) => setReplyText(e.target.value)}
+                  className="input-field min-h-[100px]"
+                  placeholder="Type your reply here..."
+                  required
+                />
+              </div>
+              
+              <div className="flex justify-end gap-2">
+                <button
+                  type="button"
+                  onClick={() => setIsReplyModalOpen(false)}
+                  className="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="btn-primary flex items-center gap-2"
+                >
+                  <Send size={16} />
+                  Send Reply
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* Feedback Modal */}
       {isModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
           <div className="bg-white dark:bg-gray-800 rounded-lg p-6 w-full max-w-md">
