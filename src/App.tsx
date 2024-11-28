@@ -17,6 +17,7 @@ import ProfileForm from './components/ProfileForm';
 import FeedbackSection from './pages/Feedback';
 import UserInfo from './pages/UserInfo';
 import UserFeedback from './pages/UserFeedback';
+import AdminPayment from './pages/AdminPayments';
 
 function App() {
   const { theme } = useThemeStore();
@@ -50,6 +51,7 @@ function App() {
               <Route path="/users" element={<UserManagement />} />
               <Route path="/feedback" element={<UserFeedback />} />
               <Route path="/user-info" element={<UserInfo />} />
+              <Route path="/payment" element={<AdminPayment />} />
               <Route path="/settings" element={<Settings />} />
             </Route>
           </Route>

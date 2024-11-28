@@ -1,5 +1,5 @@
 import { Home, UserPlus , Settings, Users, Shield, BarChart,MessageSquareText  } from 'lucide-react';
-import { CreditCard,MessageSquareDot  } from 'lucide-react';
+import { CreditCard,MessageSquareDot,Receipt} from 'lucide-react';
 import { NavLink } from 'react-router-dom';
 import { useAuthStore } from '../stores/authStore';
 
@@ -26,7 +26,7 @@ export default function Sidebar({ isOpen }: SidebarProps) {
     { name: 'User Information', icon: MessageSquareDot, href: '/user-info' },
     { name: 'User Feedback', icon: MessageSquareDot, href: '/feedback' },
     { name: 'Settings', icon: Settings, href: '/settings' },
-    { name: 'Payment', icon: Settings, href: '' },
+    { name: 'Payment', icon: Receipt, href: '/payment' },
   ];
 
   const navigation = user?.role === 'admin' ? adminNavigation : userNavigation;
