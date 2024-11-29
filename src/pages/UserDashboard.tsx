@@ -5,7 +5,7 @@ import ActivitySection from './user/ActivitySection';
 
 export default function UserDashboard() {
   const { user} = useAuthStore();  // Assuming you have isLoading to track auth loading state
-  const [activeSection, setActiveSection] = useState('overview');
+  const [activeSection] = useState('overview');
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 p-6">
