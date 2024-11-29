@@ -18,6 +18,8 @@ import UserInfo from './pages/UserInfo';
 import UserFeedback from './pages/UserFeedback';
 import AdminPayment from './pages/AdminPayments';
 import UserFeedbackPage from './pages/UserFeedbackPage';
+import Requirements from './pages/Requirements';
+import UserPayments from './pages/UserPayments';
 
 function App() {
   const { theme } = useThemeStore();
@@ -39,6 +41,8 @@ function App() {
               <Route path="/settings" element={<Settings />} />
               <Route path="/settings/profile" element={<ProfileForm />} />
               <Route path="/user-feedback" element={<UserFeedbackPage />} />
+              <Route path="/requirements" element={<Requirements />} />
+              <Route path="/user-payments" element={<UserPayments />} />
             </Route>
           </Route>
 
