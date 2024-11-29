@@ -15,7 +15,7 @@ export default function Sidebar({ isOpen }: SidebarProps) {
     { name: 'Request Pass', icon: UserPlus, href: '/requests' },
     { name: 'View Passes', icon: CreditCard  , href: '/logs' },
     { name: 'Settings', icon: Settings, href: '/settings' },
-    {name: 'Feedback', icon: MessageSquareText ,href: '/feedback'}
+    { name: 'Feedback', icon: MessageSquareText, href: '/user-feedback' },
   ];
 
   const adminNavigation = [

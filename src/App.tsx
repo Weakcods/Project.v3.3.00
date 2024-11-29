@@ -14,10 +14,10 @@ import Settings from './pages/user/Settings';
 import ProtectedRoute from './components/ProtectedRoute';
 import Layout from './components/Layout';
 import ProfileForm from './components/ProfileForm';
-import FeedbackSection from './pages/Feedback';
 import UserInfo from './pages/UserInfo';
 import UserFeedback from './pages/UserFeedback';
 import AdminPayment from './pages/AdminPayments';
+import UserFeedbackPage from './pages/UserFeedbackPage';
 
 function App() {
   const { theme } = useThemeStore();
@@ -38,7 +38,7 @@ function App() {
               <Route path="/logs" element={<AccessLogs />} />
               <Route path="/settings" element={<Settings />} />
               <Route path="/settings/profile" element={<ProfileForm />} />
-              <Route path="/feedbackuser" element={<FeedbackSection />} />
+              <Route path="/user-feedback" element={<UserFeedbackPage />} />
             </Route>
           </Route>
 
