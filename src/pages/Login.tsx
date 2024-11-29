@@ -3,7 +3,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuthStore } from '../stores/authStore';
-import { KeyRound, Mail, ArrowLeft, UserCircle2, Shield, User } from 'lucide-react';
+import { KeyRound, Mail, ArrowLeft, Shield, User } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const loginSchema = z.object({

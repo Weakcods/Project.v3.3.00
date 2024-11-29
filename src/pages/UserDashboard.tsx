@@ -1,10 +1,8 @@
 import { useState } from 'react';
-import { useAuthStore } from '../stores/authStore';
 import DashboardStats from './user/DashboardStat';
 import ActivitySection from './user/ActivitySection';
 
-export default function UserDashboard() {
-  const { user} = useAuthStore();  // Assuming you have isLoading to track auth loading state
+export default function UserDashboard() { 
   const [activeSection] = useState('overview');
 
   return (
@@ -14,7 +12,7 @@ export default function UserDashboard() {
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
-              Welcome, {user?.name || user?.email.split('@')[0]}!
+              Welcome Back Master!
             </h1>
             <p className="text-gray-600 dark:text-gray-400">
               Manage your gate passes and requirements
