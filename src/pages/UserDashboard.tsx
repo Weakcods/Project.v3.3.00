@@ -1,14 +1,10 @@
 import { useState } from 'react';
 import { useAuthStore } from '../stores/authStore';
 import DashboardStats from './user/DashboardStat';
-import RequirementsSection from './user/RequirementSection';
-import PaymentSection from './user/PaymentSection';
 import ActivitySection from './user/ActivitySection';
-import { useNavigate } from 'react-router-dom';
 
 export default function UserDashboard() {
   const { user} = useAuthStore();  // Assuming you have isLoading to track auth loading state
-  const navigate = useNavigate();
   const [activeSection, setActiveSection] = useState('overview');
 
   return (
@@ -26,23 +22,6 @@ export default function UserDashboard() {
           </div>
         </div>
 
-        {/* Navigation Tabs */}
-        <div className="flex flex-wrap gap-2">
-          {['overview', 'requirements', 'payments'].map((section) => (
-            <button
-              key={section}
-              onClick={() => setActiveSection(section)}
-              className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
-                activeSection === section
-                  ? 'bg-gradient-to-r from-[#FDFC47] to-[#24FE41] text-gray-900'
-                  : 'bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700'
-              }`}
-            >
-              {section.charAt(0).toUpperCase() + section.slice(1)}
-            </button>
-          ))}
-        </div>
-
         {/* Main Content */}
         <div className="grid gap-6">
           {activeSection === 'overview' && (
@@ -51,9 +30,6 @@ export default function UserDashboard() {
               <ActivitySection />
             </>
           )}
-
-          {activeSection === 'requirements' && <RequirementsSection />}
-          {activeSection === 'payments' && <PaymentSection />}
         </div>
       </div>
     </div>
