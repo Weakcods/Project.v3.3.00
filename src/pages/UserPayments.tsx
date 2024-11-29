@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { CreditCard, Wallet, Receipt, AlertCircle, Plus, Edit2, Trash2, X, Check } from 'lucide-react';
+import { CreditCard, Wallet, Receipt, AlertCircle, Plus, X, Check } from 'lucide-react';
 
 interface PaymentMethod {
   id: number;
@@ -127,13 +127,6 @@ export default function UserPayments() {
           <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Payments</h1>
           <p className="text-gray-600 dark:text-gray-400 mt-2">Manage your payment methods and transactions</p>
         </div>
-        <button 
-          onClick={handleCreate}
-          className="btn-primary flex items-center gap-2"
-        >
-          <Plus size={20} />
-          Add Payment Method
-        </button>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -157,18 +150,6 @@ export default function UserPayments() {
                 </div>
               </div>
               <div className="flex items-center gap-2">
-                <button
-                  onClick={() => handleEdit(method)}
-                  className="p-1 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full transition-colors"
-                >
-                  <Edit2 size={16} className="text-blue-500" />
-                </button>
-                <button
-                  onClick={() => handleDelete(method.id)}
-                  className="p-1 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full transition-colors"
-                >
-                  <Trash2 size={16} className="text-red-500" />
-                </button>
               </div>
             </div>
 
