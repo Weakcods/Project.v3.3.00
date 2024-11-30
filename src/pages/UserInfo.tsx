@@ -15,20 +15,60 @@ interface UserData {
 const initialUserInfo: UserData[] = [
   {
     id: 1,
-    name: 'John Doe',
-    email: 'john@example.com',
+    name: 'Jasper brix Olpos',
+    email: 'jasper@gmail.com',
     phone: '+1 234 567 890',
-    department: 'Computer Science',
+    department: 'CS',
     address: '123 University Ave',
     status: 'active',
-    lastActive: '2024-03-15 10:30 AM'
+    lastActive: '2024-03-23 10:30 AM'
   },
   {
     id: 2,
-    name: 'Jane Smith',
-    email: 'jane@example.com',
+    name: 'Noe Dela Conception',
+    email: 'noeeelal@gmail.com',
     phone: '+1 234 567 891',
-    department: 'Engineering',
+    department: 'CS',
+    address: '456 College St',
+    status: 'inactive',
+    lastActive: '2024-03-14 03:45 AM'
+  },
+  {
+    id: 3,
+    name: 'Reymart Azucena',
+    email: 'reyjane@gmail.com',
+    phone: '+1 234 567 891',
+    department: 'CEAT',
+    address: '456 College St',
+    status: 'inactive',
+    lastActive: '2024-03-14 03:45 PM'
+  },
+  {
+    id: 4,
+    name: 'Juan Smith',
+    email: 'juan@example.com',
+    phone: '+1 234 567 891',
+    department: 'CBA',
+    address: '456 College St',
+    status: 'active',
+    lastActive: '2024-03-14 03:45 PM'
+  },
+  {
+    id: 5,
+    name: 'Jane Tamad',
+    email: 'tamad@example.com',
+    phone: '+1 234 567 891',
+    department: 'CAH',
+    address: '456 College St',
+    status: 'inactive',
+    lastActive: '2024-03-14 03:45 PM'
+  },
+  {
+    id: 6,
+    name: 'Jhone Reyes',
+    email: 'reyess2@gmail.com',
+    phone: '+1 234 567 891',
+    department: 'CHTM',
     address: '456 College St',
     status: 'inactive',
     lastActive: '2024-03-14 03:45 PM'
@@ -117,15 +157,21 @@ export default function UserInfo() {
             />
           </div>
           <div className="relative">
-            <Filter className="absolute left-3 top-2.5 text-gray-400" size={20} />
-            <select
-              className="input-field pl-10 pr-8"
+          <Filter
+              className="absolute left-3 top-2.5 text-gray-400 dark:text-gray-500"
+              size={20}
+            />
+             <select
+              className="input-field pl-10 pr-8 text-gray-900 dark:text-gray-100 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 focus:ring focus:ring-blue-500 focus:border-blue-500 dark:focus:ring-blue-400 dark:focus:border-blue-400 rounded-md"
               value={filterDepartment}
               onChange={(e) => setFilterDepartment(e.target.value)}
             >
               <option value="all">All Departments</option>
-              <option value="cs">Computer Science</option>
-              <option value="eng">Engineering</option>
+              <option value="cs">CS</option>
+              <option value="ceat">CEAT</option>
+              <option value="cah">CAH</option>
+              <option value="cba">CBA</option>
+              <option value="chtm">CHTM</option>
             </select>
           </div>
         </div>
