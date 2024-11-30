@@ -12,10 +12,10 @@ export default function Sidebar({ isOpen }: SidebarProps) {
 
   const userNavigation = [
     { name: 'Dashboard', icon: Home, href: '/dashboard/user' },
-    { name: 'Request Pass', icon: UserPlus, href: '/requests' },
-    { name: 'View Passes', icon: CreditCard  , href: '/logs' },
     { name: 'Requirements', icon: FileText, href: '/requirements' },
     { name: 'Payments', icon: CreditCard, href: '/user-payments' },
+    { name: 'Request Pass', icon: UserPlus, href: '/requests' },
+    { name: 'View Passes', icon: CreditCard  , href: '/logs' },
     { name: 'Settings', icon: Settings, href: '/settings' },
     { name: 'Feedback', icon: MessageSquareText, href: '/user-feedback' },
 
