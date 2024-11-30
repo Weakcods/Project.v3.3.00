@@ -1,14 +1,7 @@
 import { Users, Shield, Clock, AlertTriangle, ArrowUp, ArrowDown, Download } from 'lucide-react';
 import { useState } from 'react';
 import { useAuthStore } from '../stores/authStore';
-import {
-  AreaChart, Area,
-  BarChart, Bar,
-  LineChart, Line,
-  PieChart, Pie, Cell,
-  XAxis, YAxis, CartesianGrid,
-  Tooltip, Legend, ResponsiveContainer
-} from 'recharts';
+import {AreaChart, Area,BarChart, Bar,PieChart, Pie, Cell,XAxis, YAxis, CartesianGrid,Tooltip, Legend, ResponsiveContainer} from 'recharts';
 
 const stats = [
   {
@@ -78,7 +71,7 @@ const recentAlerts = [
 ];
 
 export default function AdminDashboard() {
-  const { user } = useAuthStore();
+  // const { user } = useAuthStore();
   const [activeTab, setActiveTab] = useState('overview');
 
   return (
@@ -86,7 +79,7 @@ export default function AdminDashboard() {
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
           <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Admin Dashboard</h1>
-          <p className="text-gray-600 dark:text-gray-400">Welcome back, {user?.name}</p>
+          <p className="text-gray-600 dark:text-gray-400">Welcome back, Master the Great!</p>
         </div>
         <button className="btn-primary flex items-center gap-2">
           <Download size={20} />

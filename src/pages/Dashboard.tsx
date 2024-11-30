@@ -69,7 +69,7 @@ export default function Dashboard() {
     <div className="space-y-8">
       {/* Welcome Section */}
       <div className="fade-in">
-        <h1 className="text-3xl font-bold mb-2 text-gray-900 dark:text-white">Welcome Back 👋</h1>
+        <h1 className="text-3xl font-bold mb-2 text-gray-900 dark:text-white">Welcome Back </h1>
         <p className="text-gray-600 dark:text-gray-300">Here's what's happening with your gate passes today.</p>
       </div>
 
