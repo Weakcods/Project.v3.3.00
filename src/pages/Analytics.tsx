@@ -21,7 +21,7 @@ export default function Analytics() {
           <div className="relative">
             <Filter className="absolute left-3 top-2.5 text-gray-400" size={20} />
             <select
-              className="input-field pl-10 pr-8"
+             className="input-field pl-10 pr-8 text-gray-900 dark:text-gray-100 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 focus:ring focus:ring-[#24FE41] focus:border-[#24FE41] dark:focus:ring-[#24FE41] dark:focus:border-[#24FE41] rounded-md"
               value={selectedRange}
               onChange={(e) => setSelectedRange(e.target.value)}
             >

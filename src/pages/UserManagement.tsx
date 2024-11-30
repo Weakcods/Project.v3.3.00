@@ -83,7 +83,8 @@ export default function UserManagement() {
         <div className="relative">
           <Filter className="absolute left-3 top-2.5 text-gray-400" size={20} />
           <select
-            className="pl-10 pr-8 py-2 border rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-blue-400"
+            className="input-field pl-10 pr-8 text-gray-900 dark:text-gray-100 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 focus:ring focus:ring-[#24FE41] focus:border-[#24FE41] dark:focus:ring-[#24FE41] dark:focus:border-[#24FE41] rounded-md"
+
             value={filterRole}
             onChange={(e) => setFilterRole(e.target.value)}
           >

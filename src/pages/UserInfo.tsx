@@ -162,7 +162,7 @@ export default function UserInfo() {
               size={20}
             />
              <select
-              className="input-field pl-10 pr-8 text-gray-900 dark:text-gray-100 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 focus:ring focus:ring-blue-500 focus:border-blue-500 dark:focus:ring-blue-400 dark:focus:border-blue-400 rounded-md"
+             className="input-field pl-10 pr-8 text-gray-900 dark:text-gray-100 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 focus:ring focus:ring-[#24FE41] focus:border-[#24FE41] dark:focus:ring-[#24FE41] dark:focus:border-[#24FE41] rounded-md"
               value={filterDepartment}
               onChange={(e) => setFilterDepartment(e.target.value)}
             >

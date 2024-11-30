@@ -27,7 +27,7 @@ const initialPayments: Payment[] = [
   {
     id: 1,
     studentId: 'STU001',
-    studentName: 'John Doe',
+    studentName: 'Jasper Brix Olpos',
     amount: 500,
     type: 'Monthly',
     status: 'paid',
@@ -39,7 +39,7 @@ const initialPayments: Payment[] = [
   {
     id: 2,
     studentId: 'STU002',
-    studentName: 'Jane Smith',
+    studentName: 'Reymart Azucena',
     amount: 2500,
     type: 'Semester',
     status: 'pending',
@@ -48,12 +48,21 @@ const initialPayments: Payment[] = [
   {
     id: 3,
     studentId: 'STU003',
-    studentName: 'Mike Johnson',
+    studentName: 'Juan Tamad',
     amount: 750,
     type: 'Monthly',
-    status: 'overdue',
+    status: 'pending',
     dueDate: '2024-03-10'
-  }
+  },
+  {
+    id: 4,
+    studentId: 'STU002',
+    studentName: 'Noe Dela Conception',
+    amount: 2500,
+    type: 'Semester',
+    status: 'pending',
+    dueDate: '2024-03-20'
+  },
 ];
 
 const paymentHistory: PaymentHistory[] = [
@@ -292,7 +301,7 @@ export default function AdminPayment() {
             <div className="relative">
               <Filter className="absolute left-3 top-2.5 text-gray-400" size={20} />
               <select
-                className="input-field pl-10 pr-8"
+               className="input-field pl-10 pr-8 text-gray-900 dark:text-gray-100 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 focus:ring focus:ring-[#24FE41] focus:border-[#24FE41] dark:focus:ring-[#24FE41] dark:focus:border-[#24FE41] rounded-md"
                 value={filterStatus}
                 onChange={(e) => setFilterStatus(e.target.value)}
               >
