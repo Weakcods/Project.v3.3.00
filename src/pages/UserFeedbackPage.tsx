@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { MessageSquareText, Plus, Edit2, Trash2, X } from 'lucide-react';
+import { MessageSquareText, Plus,  Trash2, X } from 'lucide-react';
 
 interface Feedback {
   id: number;
@@ -126,12 +126,7 @@ export default function UserFeedbackPage() {
                 </div>
               </div>
               <div className="flex items-center gap-2">
-                <button
-                  onClick={() => handleEdit(feedback)}
-                  className="p-1 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full transition-colors"
-                >
-                  <Edit2 size={16} className="text-blue-500" />
-                </button>
+                
                 <button
                   onClick={() => handleDelete(feedback.id)}
                   className="p-1 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full transition-colors"
