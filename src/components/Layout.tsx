@@ -1,11 +1,13 @@
 import { Outlet } from 'react-router-dom';
 import Navbar from './Navbar';
 import Sidebar from './Sidebar';
+import Loading from './Loading';
 import { useState, useEffect } from 'react';
 
 export default function Layout() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const handleResize = () => {
@@ -15,12 +17,22 @@ export default function Layout() {
     };
 
     window.addEventListener('resize', handleResize);
+
+    // Simulate initial load
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 800);
+
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   useEffect(() => {
     if (isMobile) setIsSidebarOpen(false);
   }, [isMobile]);
+
+  if (isLoading) {
+    return <Loading text="Loading dashboard..." />;
+  }
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
