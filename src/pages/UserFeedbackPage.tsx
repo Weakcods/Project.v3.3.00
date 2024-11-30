@@ -44,12 +44,6 @@ export default function UserFeedbackPage() {
     setIsModalOpen(true);
   };
 
-  const handleEdit = (feedback: Feedback) => {
-    setEditingFeedback(feedback);
-    setFormData(feedback);
-    setIsModalOpen(true);
-  };
-
   const handleDelete = (id: number) => {
     if (confirm('Are you sure you want to delete this feedback?')) {
       setFeedbacks(feedbacks.filter(feedback => feedback.id !== id));
