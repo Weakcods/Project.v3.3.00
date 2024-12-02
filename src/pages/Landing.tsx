@@ -63,16 +63,19 @@ export default function Landing() {
       {/* Footer */}
       <footer className="bg-gray-900 dark:bg-gray-950 py-12">
         <div className="container mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-12">
+            {/* Brand Section */}
             <div>
               <div className="flex items-center space-x-2 mb-6">
                 <Shield className="w-8 h-8 text-[#24FE41]" />
                 <span className="text-xl font-bold text-white">Gate Pass</span>
               </div>
-              <p className="text-gray-300">
+              <p className="text-gray-300 text-sm sm:text-base">
                 Securing your campus with innovative digital solutions.
               </p>
             </div>
+
+            {/* Quick Links */}
             {[
               {
                 title: "Quick Links",
@@ -98,7 +101,10 @@ export default function Landing() {
                 <ul className="space-y-2">
                   {section.links.map((link, linkIndex) => (
                     <li key={linkIndex}>
-                      <a href={link.href} className="text-gray-300 hover:text-[#24FE41] transition-colors">
+                      <a
+                        href={link.href}
+                        className="text-gray-300 hover:text-[#24FE41] transition-colors"
+                      >
                         {link.name}
                       </a>
                     </li>
@@ -106,10 +112,12 @@ export default function Landing() {
                 </ul>
               </div>
             ))}
+
+            {/* Social Links */}
             <div>
               <h3 className="text-lg font-semibold text-white mb-4">Connect</h3>
               <div className="flex space-x-4">
-                {[
+                {[ 
                   { icon: Facebook, href: "#" },
                   { icon: Twitter, href: "#" },
                   { icon: Instagram, href: "#" },
@@ -126,13 +134,16 @@ export default function Landing() {
               </div>
             </div>
           </div>
+
+          {/* Footer Bottom */}
           <div className="border-t border-gray-800 mt-12 pt-8 text-center">
-            <p className="text-gray-400">
+            <p className="text-gray-400 text-sm sm:text-base">
               © {new Date().getFullYear()} Gate Pass System. All rights reserved.
             </p>
           </div>
         </div>
       </footer>
+
       <ChatBot/>
     </div>
   );
