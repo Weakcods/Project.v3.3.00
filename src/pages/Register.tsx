@@ -2,8 +2,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { Link, useNavigate } from 'react-router-dom';
-import { User, Mail, KeyRound, ArrowLeft, Shield } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { User, Mail, KeyRound, ArrowLeft, UserCircle2, AlertCircle, QrCode } from 'lucide-react';
 
 const registerSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
@@ -11,6 +10,9 @@ const registerSchema = z.object({
   password: z.string().min(6, 'Password must be at least 6 characters'),
   confirmPassword: z.string(),
   role: z.enum(['user', 'admin'], { required_error: 'Please select a role' }),
+  acceptTerms: z.boolean().refine(val => val === true, {
+    message: 'You must accept the privacy policy and terms'
+  })
 }).refine((data) => data.password === data.confirmPassword, {
   message: "Passwords don't match",
   path: ["confirmPassword"],
@@ -25,19 +27,16 @@ export default function Register() {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-    watch
   } = useForm<RegisterForm>({
     resolver: zodResolver(registerSchema),
     defaultValues: {
-      role: 'user'
+      role: 'user',
+      acceptTerms: false
     }
   });
 
-  const selectedRole = watch('role');
-
   const onSubmit = async (data: RegisterForm) => {
     try {
-      // Simulate API call
       console.log('Registration data:', data);
       navigate('/login');
     } catch (error) {
@@ -46,231 +45,171 @@ export default function Register() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center relative overflow-hidden">
-      {/* Animated Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#FDFC47] to-[#24FE41]">
-        {[...Array(20)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute bg-white/10 rounded-full"
-            style={{
-              width: Math.random() * 300 + 50,
-              height: Math.random() * 300 + 50,
-            }}
-            animate={{
-              x: [Math.random() * window.innerWidth, Math.random() * window.innerWidth],
-              y: [Math.random() * window.innerHeight, Math.random() * window.innerHeight],
-            }}
-            transition={{
-              duration: Math.random() * 10 + 20,
-              repeat: Infinity,
-              repeatType: "reverse",
-            }}
-          />
-        ))}
-      </div>
-
-      {/* Register Card */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="relative bg-white/90 dark:bg-gray-800/90 backdrop-blur-lg rounded-2xl shadow-2xl p-8 max-w-md w-full mx-4"
-      >
-        <Link 
-          to="/" 
-          className="inline-flex items-center text-gray-600 dark:text-gray-400 hover:text-[#24FE41] mb-6 transition-colors"
-        >
-          <ArrowLeft size={20} className="mr-2" />
-          Back to Home
-        </Link>
-
-        <motion.h2 
-          className="text-3xl font-bold text-center mb-8 bg-gradient-to-r from-[#FDFC47] to-[#24FE41] bg-clip-text text-transparent"
-          initial={{ scale: 0.9 }}
-          animate={{ scale: 1 }}
-        >
-          Create Account
-        </motion.h2>
-        
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-          <motion.div
-            initial={{ x: -20, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
+    <div className="min-h-screen flex bg-gray-50 dark:bg-gray-900">
+      <div className="flex-1 flex items-center justify-center px-4 sm:px-6 lg:px-8">
+        <div className="card max-w-md w-full">
+          <Link 
+            to="/" 
+            className="inline-flex items-center text-gray-600 dark:text-gray-400 hover:text-[#24FE41] mb-6 transition-colors"
           >
-            <label className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-200">Full Name</label>
-            <div className="relative group">
-              <User className="absolute left-3 top-2.5 text-gray-400 group-hover:text-[#24FE41] transition-colors" size={20} />
-              <input
-                {...register('name')}
-                type="text"
-                className="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-[#24FE41] focus:border-transparent transition-all bg-white/50 dark:bg-gray-700/50"
-                placeholder="John Doe"
-              />
+            <ArrowLeft size={20} className="mr-2" />
+            Back to Home
+          </Link>
+
+          <div className="flex items-center justify-center mb-8">
+            <div className="bg-[#24FE41]/10 p-3 rounded-full">
+              <QrCode size={40} className="text-[#24FE41]" />
             </div>
-            {errors.name && (
-              <motion.p 
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                className="mt-1 text-sm text-red-500"
-              >
-                {errors.name.message}
-              </motion.p>
-            )}
-          </motion.div>
+          </div>
 
-          <motion.div
-            initial={{ x: 20, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-          >
-            <label className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-200">Email</label>
-            <div className="relative group">
-              <Mail className="absolute left-3 top-2.5 text-gray-400 group-hover:text-[#24FE41] transition-colors" size={20} />
-              <input
-                {...register('email')}
-                type="email"
-                className="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-[#24FE41] focus:border-transparent transition-all bg-white/50 dark:bg-gray-700/50"
-                placeholder="your@email.com"
-              />
-            </div>
-            {errors.email && (
-              <motion.p 
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                className="mt-1 text-sm text-red-500"
-              >
-                {errors.email.message}
-              </motion.p>
-            )}
-          </motion.div>
-
-          <motion.div
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-          >
-            <label className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-200">Account Type</label>
-            <div className="grid grid-cols-2 gap-4">
-              <label className={`relative flex items-center justify-center p-4 rounded-lg border cursor-pointer transition-all ${
-                selectedRole === 'user' 
-                  ? 'border-[#24FE41] bg-[#24FE41]/10' 
-                  : 'border-gray-300 dark:border-gray-600'
-              }`}>
+          <h2 className="text-2xl font-bold text-center mb-2 text-gray-900 dark:text-white">Create Account</h2>
+          <p className="text-center text-gray-600 dark:text-gray-400 mb-8">Get started with your gate pass account</p>
+          
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+            <div>
+              <label className="block text-sm font-medium mb-2 text-gray-900 dark:text-white">Full Name</label>
+              <div className="relative">
+                <User className="absolute left-3 top-2.5 text-gray-400" size={20} />
                 <input
-                  type="radio"
-                  value="user"
-                  {...register('role')}
-                  className="hidden"
+                  {...register('name')}
+                  type="text"
+                  className="input-field pl-10"
+                  placeholder="John Doe"
                 />
-                <User className={`mr-2 ${
-                  selectedRole === 'user' ? 'text-[#24FE41]' : 'text-gray-400'
-                }`} size={20} />
-                <span className={selectedRole === 'user' ? 'text-[#24FE41]' : 'text-gray-600 dark:text-gray-300'}>
-                  User
-                </span>
-              </label>
-
-              <label className={`relative flex items-center justify-center p-4 rounded-lg border cursor-pointer transition-all ${
-                selectedRole === 'admin' 
-                  ? 'border-[#24FE41] bg-[#24FE41]/10' 
-                  : 'border-gray-300 dark:border-gray-600'
-              }`}>
-                <input
-                  type="radio"
-                  value="admin"
-                  {...register('role')}
-                  className="hidden"
-                />
-                <Shield className={`mr-2 ${
-                  selectedRole === 'admin' ? 'text-[#24FE41]' : 'text-gray-400'
-                }`} size={20} />
-                <span className={selectedRole === 'admin' ? 'text-[#24FE41]' : 'text-gray-600 dark:text-gray-300'}>
-                  Admin
-                </span>
-              </label>
-            </div>
-          </motion.div>
-
-          <motion.div
-            initial={{ x: -20, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-          >
-            <label className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-200">Password</label>
-            <div className="relative group">
-              <KeyRound className="absolute left-3 top-2.5 text-gray-400 group-hover:text-[#24FE41] transition-colors" size={20} />
-              <input
-                {...register('password')}
-                type="password"
-                className="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-[#24FE41] focus:border-transparent transition-all bg-white/50 dark:bg-gray-700/50"
-                placeholder="••••••••"
-              />
-            </div>
-            {errors.password && (
-              <motion.p 
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                className="mt-1 text-sm text-red-500"
-              >
-                {errors.password.message}
-              </motion.p>
-            )}
-          </motion.div>
-
-          <motion.div
-            initial={{ x: 20, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-          >
-            <label className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-200">Confirm Password</label>
-            <div className="relative group">
-              <KeyRound className="absolute left-3 top-2.5 text-gray-400 group-hover:text-[#24FE41] transition-colors" size={20} />
-              <input
-                {...register('confirmPassword')}
-                type="password"
-                className="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-[#24FE41] focus:border-transparent transition-all bg-white/50 dark:bg-gray-700/50"
-                placeholder="••••••••"
-              />
-            </div>
-            {errors.confirmPassword && (
-              <motion.p 
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                className="mt-1 text-sm text-red-500"
-              >
-                {errors.confirmPassword.message}
-              </motion.p>
-            )}
-          </motion.div>
-
-          <motion.button
-            type="submit"
-            disabled={isSubmitting}
-            className="w-full py-3 px-4 rounded-lg bg-gradient-to-r from-[#FDFC47] to-[#24FE41] text-gray-900 font-medium hover:opacity-90 transition-opacity disabled:opacity-50"
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-          >
-            {isSubmitting ? (
-              <div className="flex items-center justify-center">
-                <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-gray-900 mr-2"></div>
-                Creating account...
               </div>
-            ) : (
-              'Create account'
-            )}
-          </motion.button>
-        </form>
+              {errors.name && (
+                <p className="mt-1 text-sm text-red-500 flex items-center gap-1">
+                  <AlertCircle size={16} />
+                  {errors.name.message}
+                </p>
+              )}
+            </div>
 
-        <div className="mt-6 text-center">
-          <motion.p 
-            className="text-sm text-gray-600 dark:text-gray-400"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.2 }}
-          >
+            <div>
+              <label className="block text-sm font-medium mb-2 text-gray-900 dark:text-white">Email</label>
+              <div className="relative">
+                <Mail className="absolute left-3 top-2.5 text-gray-400" size={20} />
+                <input
+                  {...register('email')}
+                  type="email"
+                  className="input-field pl-10"
+                  placeholder="your@email.com"
+                />
+              </div>
+              {errors.email && (
+                <p className="mt-1 text-sm text-red-500 flex items-center gap-1">
+                  <AlertCircle size={16} />
+                  {errors.email.message}
+                </p>
+              )}
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium mb-2 text-gray-900 dark:text-white">Account Type</label>
+              <div className="relative">
+                <UserCircle2 className="absolute left-3 top-2.5 text-gray-400" size={20} />
+                <select
+                  {...register('role')}
+                  className="input-field pl-10 appearance-none"
+                >
+                  <option value="user">User</option>
+                  <option value="admin">Administrator</option>
+                </select>
+              </div>
+              {errors.role && (
+                <p className="mt-1 text-sm text-red-500 flex items-center gap-1">
+                  <AlertCircle size={16} />
+                  {errors.role.message}
+                </p>
+              )}
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium mb-2 text-gray-900 dark:text-white">Password</label>
+              <div className="relative">
+                <KeyRound className="absolute left-3 top-2.5 text-gray-400" size={20} />
+                <input
+                  {...register('password')}
+                  type="password"
+                  className="input-field pl-10"
+                  placeholder="••••••••"
+                />
+              </div>
+              {errors.password && (
+                <p className="mt-1 text-sm text-red-500 flex items-center gap-1">
+                  <AlertCircle size={16} />
+                  {errors.password.message}
+                </p>
+              )}
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium mb-2 text-gray-900 dark:text-white">Confirm Password</label>
+              <div className="relative">
+                <KeyRound className="absolute left-3 top-2.5 text-gray-400" size={20} />
+                <input
+                  {...register('confirmPassword')}
+                  type="password"
+                  className="input-field pl-10"
+                  placeholder="••••••••"
+                />
+              </div>
+              {errors.confirmPassword && (
+                <p className="mt-1 text-sm text-red-500 flex items-center gap-1">
+                  <AlertCircle size={16} />
+                  {errors.confirmPassword.message}
+                </p>
+              )}
+            </div>
+
+            <div className="flex items-start">
+              <div className="flex items-center h-5">
+                <input
+                  {...register('acceptTerms')}
+                  type="checkbox"
+                  className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-[#24FE41] dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-[#24FE41] dark:ring-offset-gray-800"
+                />
+              </div>
+              <div className="ml-3 text-sm">
+                <label className="font-light text-gray-600 dark:text-gray-400">
+                  I accept the{' '}
+                  <a href="#" className="font-medium text-[#24FE41] hover:underline">Privacy Policy</a>
+                  {' '}and{' '}
+                  <a href="#" className="font-medium text-[#24FE41] hover:underline">Terms of Service</a>
+                </label>
+              </div>
+            </div>
+            {errors.acceptTerms && (
+              <p className="text-sm text-red-500 flex items-center gap-1">
+                <AlertCircle size={16} />
+                {errors.acceptTerms.message}
+              </p>
+            )}
+
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className="btn-primary w-full flex items-center justify-center"
+            >
+              {isSubmitting ? (
+                <div className="flex items-center">
+                  <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
+                  Creating account...
+                </div>
+              ) : (
+                'Create account'
+              )}
+            </button>
+          </form>
+
+          <p className="mt-6 text-center text-sm text-gray-600 dark:text-gray-400">
             Already have an account?{' '}
             <Link to="/login" className="text-[#24FE41] hover:underline font-medium">
               Sign in
             </Link>
-          </motion.p>
+          </p>
         </div>
-      </motion.div>
+      </div>
     </div>
   );
 }
