@@ -13,7 +13,7 @@ export default function AboutSection() {
     {
       name: "Jasper Brix Olpos",
       role: "Pancit canton/kape",
-      image: "/public/jas.jpg",
+      image: "/jas.jpg",
       bio: "10+ years in sa Pilipinas, madami Chix",
       social: {
         facebook: "#",
@@ -24,7 +24,7 @@ export default function AboutSection() {
     {
       name: "Reymart Azucena",
       role: "Debugger/Consultant",
-      image: "/public/mart.jpg",
+      image: "/mart.jpg",
       bio: "Former chief of campus security",
       social: {
         instagram: "#",
@@ -35,7 +35,7 @@ export default function AboutSection() {
     {
       name: "Noe Dela Cruz",
       role: "Researcher",
-      image: "/public/noe.jpg",
+      image: "/noe.jpg",
       bio: "Specialist in user-centered design",
       social: {
         instagram: "#",
@@ -46,7 +46,7 @@ export default function AboutSection() {
     {
       name: "Joshua Bacay",
       role: "Lead Developer/UI/UX Designer",
-      image: "/public/me.jpg",
+      image: "/me.jpg",
       bio: "Full-stack developer & security expert",
       social: {
         instagram: "#",
